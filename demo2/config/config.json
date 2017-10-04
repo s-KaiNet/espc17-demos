@@ -1,0 +1,18 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "qa-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/qa/QAWebPart.js",
+          "manifest": "./src/webparts/qa/QAWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "QAWebPartStrings": "lib/webparts/qa/loc/{locale}.js"
+  }
+}
