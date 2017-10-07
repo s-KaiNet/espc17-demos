@@ -11,7 +11,9 @@
       ]
     }
   },
-  "externals": {},
+  "externals": {
+    "vue": "node_modules/vue/dist/vue.runtime.js"
+  },
   "localizedResources": {
     "QAWebPartStrings": "lib/webparts/qa/loc/{locale}.js"
   }

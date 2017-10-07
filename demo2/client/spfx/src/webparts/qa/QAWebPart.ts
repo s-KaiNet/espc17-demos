@@ -6,8 +6,10 @@ import {
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-import styles from './QAWebPart.module.scss';
+import * as Vue from 'vue';
+import Accordion from "./components/accordion/Accordion.vue";
 import * as strings from 'QAWebPartStrings';
+import 'keen-ui/dist/keen-ui.css';
 
 export interface IQAWebPartProps {
   description: string;
@@ -17,20 +19,13 @@ export default class QAWebPartWebPart extends BaseClientSideWebPart<IQAWebPartPr
 
   public render(): void {
     this.domElement.innerHTML = `
-      <div class="${styles.qa}">
-        <div class="${styles.container}">
-          <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
-            <div class="ms-Grid-col ms-lg10 ms-xl8 ms-xlPush2 ms-lgPush1">
-              <span class="ms-font-xl ms-fontColor-white">Welcome to SharePoint!</span>
-              <p class="ms-font-l ms-fontColor-white">Customize SharePoint experiences using Web Parts.</p>
-              <p class="ms-font-l ms-fontColor-white">${escape(this.properties.description)}</p>
-              <a href="https://aka.ms/spfx" class="${styles.button}">
-                <span class="${styles.label}">Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>`;
+    <div id="app-${this.context.instanceId}">
+    </div>`;
+
+    new Vue({
+      el: `#app-${this.context.instanceId}`,
+      render: h => h(Accordion)
+    });
   }
 
   protected get dataVersion(): Version {

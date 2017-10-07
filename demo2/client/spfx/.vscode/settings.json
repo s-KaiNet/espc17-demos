@@ -6,9 +6,9 @@
     "**/.DS_Store": true,
     "**/bower_components": true,
     "**/coverage": true,
-    "**/lib-amd": true,
-    "src/**/*.scss.ts": true
+    "**/lib-amd": true
   },
+  "files.autoSave": "off",
   "typescript.tsdk": ".\\node_modules\\typescript\\lib",
   "json.schemas": [
     {
