@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div v-for="item in loopValues" :key="item">
-            <ui-collapsible title="This is open initially" open>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur nemo suscipit ipsa molestias, tempora dolor natus modi et incidunt tenetur!
+    <div> working </div>
+        <div v-for="q in questions" :key="q.id">
+            <ui-collapsible :title="q.Question">
+                <div v-html="q.Answer"></div>
             </ui-collapsible>
         </div>
     </div>

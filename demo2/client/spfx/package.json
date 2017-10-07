@@ -16,13 +16,15 @@
     "@microsoft/sp-webpart-base": "~1.3.0",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
     "bootstrap": "^3.3.7",
+    "es6-promise": "^4.1.1",
     "file-loader": "^1.1.5",
     "keen-ui": "^1.0.1",
     "vue": "^2.4.4",
     "vue-class-component": "^5.0.2",
     "vue-property-decorator": "^5.3.0",
     "vue-strap": "^1.1.37",
-    "vue-template-compiler": "^2.4.4"
+    "vue-template-compiler": "^2.4.4",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "~1.3.0",

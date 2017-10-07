@@ -2,13 +2,15 @@
   "name": "qa-common",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsc --project tsconfig.json --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sp-pnp-js": "^3.0.1"
+    "sp-pnp-js": "^3.0.1",
+    "url-parse": "^1.1.9"
   }
 }

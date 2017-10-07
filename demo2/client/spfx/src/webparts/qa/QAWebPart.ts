@@ -9,6 +9,8 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import * as Vue from 'vue';
 import Accordion from "./components/accordion/Accordion.vue";
 import * as strings from 'QAWebPartStrings';
+import 'es6-promise';
+import 'whatwg-fetch';
 import 'keen-ui/dist/keen-ui.css';
 
 export interface IQAWebPartProps {
@@ -21,10 +23,14 @@ export default class QAWebPartWebPart extends BaseClientSideWebPart<IQAWebPartPr
     this.domElement.innerHTML = `
     <div id="app-${this.context.instanceId}">
     </div>`;
-
+    // tslint:disable-next-line:no-unused-expression
     new Vue({
       el: `#app-${this.context.instanceId}`,
-      render: h => h(Accordion)
+      render: h => h(Accordion, {
+        props: {
+          ctx: this.context
+        }
+      })
     });
   }
 
