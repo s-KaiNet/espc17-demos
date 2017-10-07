@@ -1,0 +1,28 @@
+{
+  "name": "qa-azure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:watch": "tsc -w",
+    "build": "tsc",
+    "az": "npm run build && func host start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^8.0.33"
+  },
+  "dependencies": {
+    "@types/bluebird": "^3.5.14",
+    "@types/request-promise": "^4.1.38",
+    "adal-node": "^0.1.22",
+    "bluebird": "^3.5.1",
+    "cpass": "^2.0.1",
+    "node-pnp-js": "^0.1.2",
+    "qa-common": "file:../../common",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sp-pnp-js": "^3.0.1"
+  }
+}

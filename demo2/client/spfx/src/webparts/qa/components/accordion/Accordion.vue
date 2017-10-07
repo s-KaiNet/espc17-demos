@@ -1,6 +1,5 @@
 <template>
     <div>
-    <div> working </div>
         <div v-for="q in questions" :key="q.id">
             <ui-collapsible :title="q.Question">
                 <div v-html="q.Answer"></div>

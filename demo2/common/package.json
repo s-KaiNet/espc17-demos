@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "node-pnp-js": "^0.1.2",
     "sp-pnp-js": "^3.0.1",
     "url-parse": "^1.1.9"
   }

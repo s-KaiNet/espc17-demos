@@ -1,4 +1,4 @@
-import { PnPRestResolver } from "./PnPRestResolver";
+import { PnPRestResolver } from "./../PnPRestResolver";
 import { SPRest } from "sp-pnp-js/lib/sharepoint/rest";
 import * as pnp from "sp-pnp-js";
 

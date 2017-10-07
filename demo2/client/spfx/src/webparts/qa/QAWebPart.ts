@@ -1,17 +1,17 @@
-import { Version } from '@microsoft/sp-core-library';
+import { Version } from "@microsoft/sp-core-library";
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-import { escape } from '@microsoft/sp-lodash-subset';
+} from "@microsoft/sp-webpart-base";
+import { escape } from "@microsoft/sp-lodash-subset";
 
-import * as Vue from 'vue';
+import * as Vue from "vue";
 import Accordion from "./components/accordion/Accordion.vue";
-import * as strings from 'QAWebPartStrings';
-import 'es6-promise';
-import 'whatwg-fetch';
-import 'keen-ui/dist/keen-ui.css';
+import * as strings from "QAWebPartStrings";
+import "es6-promise";
+import "whatwg-fetch";
+import "keen-ui/dist/keen-ui.css";
 
 export interface IQAWebPartProps {
   description: string;
@@ -35,7 +35,7 @@ export default class QAWebPartWebPart extends BaseClientSideWebPart<IQAWebPartPr
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -49,7 +49,7 @@ export default class QAWebPartWebPart extends BaseClientSideWebPart<IQAWebPartPr
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
+                PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel
                 })
               ]

@@ -8,6 +8,7 @@
     "**/coverage": true,
     "**/lib-amd": true
   },
+  "tslint.autoFixOnSave": true,
   "files.autoSave": "off",
   "typescript.tsdk": ".\\node_modules\\typescript\\lib",
   "json.schemas": [
