@@ -28,7 +28,7 @@ async function execute(context: any, data: IWebHookData): Promise<any> {
         'Authorization': 'Bearer ' + accesstoken
     }));
 
-    let service = new QAService(mngr, data.listId);
+    let service = new QAService(mngr, data);
     await service.syncDb();
 
     context.res = {

@@ -43,10 +43,15 @@ export class QAListManager {
         });
     }
 
+    public getQuestionById(id: number): Promise<any> {
+        return this.getQandAList().items.getById(id).get();
+    }
+
     private getQandAList(listId?: string): List {
         if (listId) {
             return this.sp.web.lists.getById(listId);
         }
+
         return this.sp.web.getList(`${this.serverRelativeUrl}/Lists/QA`);
     }
 

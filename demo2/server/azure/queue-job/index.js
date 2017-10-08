@@ -32,7 +32,7 @@ function execute(context, data) {
         let mngr = new qa_common_1.QAListManager(new qa_common_1.NodePnPRestResolver(`${tenantUrl}${data.siteRelativeUrl}`, {
             'Authorization': 'Bearer ' + accesstoken
         }));
-        let service = new QAService_1.QAService(mngr, data.listId);
+        let service = new QAService_1.QAService(mngr, data);
         yield service.syncDb();
         context.res = {
             body: {
