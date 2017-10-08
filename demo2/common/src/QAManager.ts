@@ -1,10 +1,11 @@
-import { SPRest } from "sp-pnp-js/lib/sharepoint/rest";
-import { PnPRestResolver } from "./resolver/PnPRestResolver";
-import * as URL from "url-parse";
+import { SPRest } from 'sp-pnp-js/lib/sharepoint/rest';
+import { PnPRestResolver } from './resolver/PnPRestResolver';
+import * as pnp from 'sp-pnp-js';
+const URL: any = require('url-parse');
 
 export class QAManager {
 
-    private sp: SPRest;
+    private sp: typeof pnp.sp;
     private serverRelativeUrl: string;
 
     constructor(resolver: PnPRestResolver) {

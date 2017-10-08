@@ -8,10 +8,13 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "types": [
-      "es6-promise",
-      "es6-collections",
       "webpack-env"
+    ],
+    "lib": [
+      "dom",
+      "es6"
     ]
   }
 }

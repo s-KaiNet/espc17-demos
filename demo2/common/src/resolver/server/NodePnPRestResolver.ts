@@ -1,10 +1,8 @@
-import { PnPRestResolver } from "./../PnPRestResolver";
-import { SPRest } from "sp-pnp-js/lib/sharepoint/rest";
-import { PlainNodeFetchClient } from "node-pnp-js";
-import * as pnp from "sp-pnp-js";
+import { PnPRestResolver } from './../PnPRestResolver';
+import { PlainNodeFetchClient } from 'node-pnp-js';
+import * as pnp from 'sp-pnp-js';
 
 export class NodePnPRestResolver extends PnPRestResolver {
-
     constructor(baseUrl: string, private headers: { [key: string]: string; }) {
         super(baseUrl);
 
@@ -16,7 +14,7 @@ export class NodePnPRestResolver extends PnPRestResolver {
         });
     }
 
-    getPnPRestInstance(): SPRest {
+    getPnPRestInstance(): typeof pnp.sp {
         return pnp.sp.configure({
             headers: this.headers
         });

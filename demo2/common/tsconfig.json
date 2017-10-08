@@ -6,6 +6,10 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "lib": [
+      "dom",
+      "es2015"
+    ]
   }
 }

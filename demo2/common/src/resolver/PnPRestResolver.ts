@@ -1,7 +1,7 @@
-import { SPRest } from "sp-pnp-js/lib/sharepoint/rest";
+import * as pnp from 'sp-pnp-js';
 
 export abstract class PnPRestResolver {
     constructor(public baseUrl: string) {}
 
-    abstract getPnPRestInstance(): SPRest;
+    abstract getPnPRestInstance(): typeof pnp.sp;
 }

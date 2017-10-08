@@ -1,6 +1,5 @@
-import { PnPRestResolver } from "./../PnPRestResolver";
-import { SPRest } from "sp-pnp-js/lib/sharepoint/rest";
-import * as pnp from "sp-pnp-js";
+import { PnPRestResolver } from './../PnPRestResolver';
+import * as pnp from 'sp-pnp-js';
 
 export class SpfxPnPRestResolver extends PnPRestResolver {
 
@@ -8,7 +7,7 @@ export class SpfxPnPRestResolver extends PnPRestResolver {
         super(baseUrl);
     }
 
-    getPnPRestInstance(): SPRest {
+    getPnPRestInstance(): typeof pnp.sp {
         pnp.setup({
             sp: {
                 baseUrl: this.baseUrl

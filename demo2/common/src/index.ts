@@ -1,3 +1,3 @@
-export * from "./QAManager";
-export * from "./resolver";
-export * from "./interfaces/IQuestion";
+export * from './QAManager';
+export * from './resolver';
+export * from './interfaces/IQuestion';

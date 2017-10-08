@@ -2,7 +2,9 @@ import * as Vue from "vue";
 import { UiCollapsible } from "keen-ui";
 import { Component, Prop } from "vue-property-decorator";
 
-import { QAManager, SpfxPnPRestResolver, IQuestion } from "qa-common";
+import { QAManager } from "qa-common/lib/QAManager";
+import { IQuestion } from "qa-common/lib/interfaces/IQuestion";
+import { SpfxPnPRestResolver } from "qa-common/lib/resolver/client/SpfxPnPRestResolver";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 @Component({
