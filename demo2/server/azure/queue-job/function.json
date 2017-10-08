@@ -1,0 +1,13 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "queueTrigger",
+      "direction": "in",
+      "name": "data",
+      "queueName": "qa-manager",
+      "connection": "devconnection"
+    }
+  ]
+}

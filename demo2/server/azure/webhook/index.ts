@@ -1,39 +1,28 @@
-import { AppSettings } from './../Shared/AppSettings';
-import { PlainNodeFetchClient } from 'node-pnp-js';
-import * as pnp from 'sp-pnp-js';
-
-import { QAManager, NodePnPRestResolver, IQuestion } from 'qa-common';
-import { AuthHelper } from '../Shared/AuthHelper';
-
+import { ISubscriptionEventArgs } from './../Shared/interfaces/ISubscriptionEventArgs';
 export function run(context: any, req: any): void {
-    execute(context, req)
-        .catch((err: any) => {
-            console.log(err);
-            context.res = {
-                status: 500,
-                body: err.toString()
-            };
-            context.done();
+    if (context.req.query.validationtoken) {
+        context.res = {
+            body: context.req.query.validationtoken,
+            headers: {
+                'Content-Type': 'text/plain'
+            }
+        };
+        context.done();
+        return;
+    }
+
+    if (!req.value || !(req.value instanceof Array)) {
+        throw new Error('Unable to parse incoming request');
+    }
+    context.bindings.queueRequest = [];
+
+    req.value.forEach((item: ISubscriptionEventArgs) => {
+        context.bindings.queueRequest.push({
+            tenantId: item.tenantId,
+            siteRelativeUrl: item.siteUrl,
+            listId: item.resource
         });
-}
+    });
 
-async function execute(context: any, req: any): Promise<any> {
-    let tenantUrl = AppSettings.get('TenantUrl');
-    let auth = new AuthHelper(tenantUrl);
-    let accesstoken = await auth.getAppOnlyToken();
-
-    let mngr = new QAManager(new NodePnPRestResolver(`${tenantUrl}/sites/hr`, {
-        'Authorization': 'Bearer ' + accesstoken
-    }));
-
-    let web = await mngr.getAllQandA();
-
-    context.log(web);
-
-    context.res = {
-        body: {
-            message: `Hello from azure function!`
-        }
-    };
     context.done();
 }

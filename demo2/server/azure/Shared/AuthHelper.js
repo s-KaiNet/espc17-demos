@@ -15,12 +15,12 @@ const fs = require("fs");
 const adal = require('adal-node');
 const cpass = new cpass_1.Cpass();
 class AuthHelper {
-    constructor(resource) {
+    constructor(resource, tenantId) {
         this.resource = resource;
+        this.tenantId = tenantId;
         this.clientId = AppSettings_1.AppSettings.get('ClientId');
         this.clientSecret = cpass.decode(AppSettings_1.AppSettings.get('ClientSecret'));
         this.thumbprint = AppSettings_1.AppSettings.get('Thumbprint');
-        this.tenantId = AppSettings_1.AppSettings.get('TenantId');
     }
     getAppOnlyToken() {
         return __awaiter(this, void 0, void 0, function* () {

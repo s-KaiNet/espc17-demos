@@ -2,19 +2,22 @@
   "disabled": false,
   "bindings": [
     {
-      "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req",
-      "methods": [
-        "get",
-        "post"
-      ]
+      "webHookType": "genericJson",
+      "name": "req"
     },
     {
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "queueName": "qa-manager",
+      "connection": "devconnection",
+      "name": "queueRequest"
     }
   ]
 }

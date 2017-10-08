@@ -11,13 +11,11 @@ export class AuthHelper {
     private clientId: string;
     private clientSecret: string;
     private thumbprint: string;
-    private tenantId: string;
 
-    constructor(private resource: string) {
+    constructor(private resource: string, private tenantId: string) {
         this.clientId = AppSettings.get('ClientId');
         this.clientSecret = cpass.decode(AppSettings.get('ClientSecret'));
         this.thumbprint = AppSettings.get('Thumbprint');
-        this.tenantId = AppSettings.get('TenantId');
     }
 
     public async getAppOnlyToken(): Promise<string> {
