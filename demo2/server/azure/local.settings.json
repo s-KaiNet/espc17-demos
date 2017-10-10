@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+    "devconnection": "UseDevelopmentStorage=true",
+    "MongoDbConnection": "mongodb://localhost:27017/qa-manager",
+    "TenantUrl": "https://mvapps.sharepoint.com",
+    "Thumbprint": "38a4b813da18ab2f36b3e9cd5904d9c72f1ad62a",
+    "ClientId": "6906f819-f72d-4acb-8be4-17f9dfa0d5cf",
+    "ClientSecret": "625f59c45fa5f6026f8e3d21b2ad3fa8e11511a40bc88368d929159a6597780a88ee8dda161683543bf1fbd84f25a0dflHLidSOyS9IBlNYeeWZZvMjiYAFqglwZuDwnM/IKqEjb1OLvdfDmaCncgIyWBJAy"
+  }
+}

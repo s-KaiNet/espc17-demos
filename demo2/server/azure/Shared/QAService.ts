@@ -17,15 +17,26 @@ export class QAService {
     }
 
     public async syncDb(): Promise<any> {
-        let web = await this.listManager.getLastChanges(this.data.listId) as IChange[];
-        let updatedItems = web.filter((item) => item.ChangeType === ChangeType.Add || item.ChangeType === ChangeType.Update);
-        let deletedItems = web.filter((item) => item.ChangeType === ChangeType.Delete);
+        let changes = await this.listManager.getLastChanges(this.data.listId) as IChange[];
+        let updatedItems = changes.filter((item) => item.ChangeType === ChangeType.Add || item.ChangeType === ChangeType.Update);
+        let deletedItems = changes.filter((item) => item.ChangeType === ChangeType.Delete);
 
         await this.processUpdatedItems(updatedItems);
     }
 
     private async processUpdatedItems(items: IChange[]): Promise<any> {
-        items.forEach(async (item) => {
+        let uniqueItems: IChange[] = [];
+
+        items.forEach(item => {
+            let exists = uniqueItems.find(i => {
+                return i.ItemId === item.ItemId;
+            });
+
+            if (exists) return;
+            uniqueItems.push(item);
+        });
+
+        uniqueItems.forEach(async (item) => {
             try {
                 let listItem = await this.listManager.getQuestionById(item.ItemId);
 
@@ -40,16 +51,27 @@ export class QAService {
         });
     }
 
-    private async addItemForModeration(item: any): Promise<any> {
-        let site = await Site.findOne({ 'serverRelativeUrl': this.data.siteRelativeUrl }).exec() as ISiteModel;
-
-        if (!site) {
-            site = await this.createSite();
-        }
+    private async removeItem(item: any): Promise<any> {
+        let site = await this.ensureSite();
 
         let question = await Question.findOne({
-            'listId': item.Id,
-            'site': new mongoose.Types.ObjectId(site._id)
+            'listItemId': item.Id,
+            'site': site._id
+        }).exec();
+
+        if (!question) {
+            return;
+        }
+        site.questions.pull();
+        question.remove();
+    }
+
+    private async addItemForModeration(item: any): Promise<any> {
+        let site = await this.ensureSite();
+
+        let question = await Question.findOne({
+            'listItemId': item.Id,
+            'site': site._id
         }).exec();
 
         if (question) {
@@ -63,6 +85,16 @@ export class QAService {
 
         await site.save();
         await question.save();
+    }
+
+    private async ensureSite(): Promise<ISiteModel> {
+        let site = await Site.findOne({ 'serverRelativeUrl': this.data.siteRelativeUrl }).exec() as ISiteModel;
+
+        if (!site) {
+            site = await this.createSite();
+        }
+
+        return site;
     }
 
     private async createSite(): Promise<ISiteModel> {

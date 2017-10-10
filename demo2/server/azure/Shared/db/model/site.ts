@@ -1,10 +1,11 @@
-import { Schema, Document, Model, model } from 'mongoose';
-import { IQuestionModel } from './question';
+import { Schema, Document, Model, model, Types } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { IQuestionModel, Question } from './question';
 
 export interface ISiteModel extends Document {
     serverRelativeUrl: string;
     id: string;
-    questions: IQuestionModel[];
+    questions: Types.Array<IQuestionModel>;
 }
 
 const siteSchema = new Schema({
