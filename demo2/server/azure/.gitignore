@@ -24,3 +24,4 @@ project.lock.json
 appsettings.json
 
 *.js
+*.js.map

@@ -18,23 +18,16 @@ export class QAService {
 
     public async syncDb(): Promise<any> {
         let changes = await this.listManager.getLastChanges(this.data.listId) as IChange[];
+
         let updatedItems = changes.filter((item) => item.ChangeType === ChangeType.Add || item.ChangeType === ChangeType.Update);
         let deletedItems = changes.filter((item) => item.ChangeType === ChangeType.Delete);
 
         await this.processUpdatedItems(updatedItems);
+        await this.processDeletedItems(deletedItems);
     }
 
     private async processUpdatedItems(items: IChange[]): Promise<any> {
-        let uniqueItems: IChange[] = [];
-
-        items.forEach(item => {
-            let exists = uniqueItems.find(i => {
-                return i.ItemId === item.ItemId;
-            });
-
-            if (exists) return;
-            uniqueItems.push(item);
-        });
+        let uniqueItems = this.createUniqueArray(items);
 
         uniqueItems.forEach(async (item) => {
             try {
@@ -51,19 +44,45 @@ export class QAService {
         });
     }
 
-    private async removeItem(item: any): Promise<any> {
+    private async processDeletedItems(items: IChange[]): Promise<any> {
+        let uniqueItems = this.createUniqueArray(items);
+
+        uniqueItems.forEach(async (item) => {
+            await this.removeItem(item);
+        });
+    }
+
+    private createUniqueArray(items: IChange[]): IChange[] {
+        let uniqueItems: IChange[] = [];
+
+        items.forEach(item => {
+            let exists = uniqueItems.find(i => {
+                return i.ItemId === item.ItemId;
+            });
+
+            if (exists) return;
+            uniqueItems.push(item);
+        });
+
+        return uniqueItems;
+    }
+
+    private async removeItem(item: IChange): Promise<any> {
         let site = await this.ensureSite();
 
         let question = await Question.findOne({
-            'listItemId': item.Id,
+            'listItemId': item.ItemId,
             'site': site._id
         }).exec();
 
         if (!question) {
             return;
         }
-        site.questions.pull();
-        question.remove();
+
+        site.questions.pull(question._id);
+
+        await site.save();
+        await question.remove();
     }
 
     private async addItemForModeration(item: any): Promise<any> {
