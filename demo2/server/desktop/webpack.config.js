@@ -12,7 +12,7 @@ module.exports = {
     filename: '[name].js',
     sourceMapFilename: '[file].map',
     chunkFilename: '[id].chunk.js',
-},
+  },
   module: {
     rules: [
       {
@@ -51,8 +51,13 @@ module.exports = {
         query: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /rx\.lite\.aggregates\.js/,
+        use: 'imports-loader?define=>false'
       }
-    ]
+    ],
+    exprContextCritical: false
   },
   target: 'electron-renderer',
   resolve: {
@@ -68,17 +73,23 @@ module.exports = {
   performance: {
     hints: false
   },
+  node: {
+    __dirname: true,
+    __filename: true
+  },
   devtool: 'cheap-module-source-map',
   plugins: [
     new CommonsChunkPlugin({
-        name: 'vendor',
-        chunks: ['app'],
-        minChunks: module => /node_modules/.test(module.resource)
+      name: 'vendor',
+      chunks: ['app'],
+      minChunks: module => /node_modules/.test(module.resource)
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, './index.html')
-    })]
+    }),
+    new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
+    new webpack.IgnorePlugin(/vertx/)],
 }
 
 if (process.env.NODE_ENV === 'production') {
