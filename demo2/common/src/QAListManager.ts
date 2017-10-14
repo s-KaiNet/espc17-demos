@@ -47,6 +47,10 @@ export class QAListManager {
         return this.getQandAList().items.getById(id).get();
     }
 
+    public getCurrentUser(): Promise<any> {
+        return this.sp.web.currentUser.get();
+    }
+
     private getQandAList(listId?: string): List {
         if (listId) {
             return this.sp.web.lists.getById(listId);

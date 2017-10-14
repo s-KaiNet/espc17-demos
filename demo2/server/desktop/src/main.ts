@@ -1,13 +1,21 @@
 import Vue from 'vue';
-import KeenUI from 'keen-ui';
-import './assets/app.css';
-import 'keen-ui/dist/keen-ui.css';
-import App from './components/App.vue';
+import * as ElementUI from 'element-ui';
+import 'element-ui/lib/theme-default/index.css';
+import locale from 'element-ui/lib/locale/lang/en';
+import VueRouter from 'vue-router';
 
-Vue.use(KeenUI);
+import './assets/app.css';
+import App from './components/App/App.vue';
+import router from './routes';
+
+Vue.use(ElementUI, { locale });
+Vue.use(VueRouter);
 
 // tslint:disable-next-line:no-unused-expression
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router: router
 });
+
+router.replace('/login');

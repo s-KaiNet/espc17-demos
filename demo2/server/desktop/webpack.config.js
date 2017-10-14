@@ -89,7 +89,10 @@ module.exports = {
       template: path.resolve(__dirname, './index.html')
     }),
     new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
-    new webpack.IgnorePlugin(/vertx/)],
+    new webpack.IgnorePlugin(/vertx/),
+    new webpack.DefinePlugin({
+      ROOT_SP_URL: JSON.stringify('https://mvapps.sharepoint.com')
+    })],
 }
 
 if (process.env.NODE_ENV === 'production') {
