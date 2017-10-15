@@ -119,6 +119,7 @@ export class QAService {
     private async createSite(): Promise<ISiteModel> {
         let site = new Site();
         site.serverRelativeUrl = this.data.siteRelativeUrl;
+        site.title = await this.listManager.getWebTitle();
         return site.save();
     }
 }

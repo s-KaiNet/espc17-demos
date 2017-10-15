@@ -6,9 +6,8 @@ export interface IQuestionModel extends mongoose.Document {
     site: ISiteModel;
 }
 
-const questionSchema = new mongoose.Schema({
+export const questionSchema = new mongoose.Schema({
     listItemId: Number,
     site: { type: mongoose.Schema.Types.ObjectId, ref: 'Site' }
 });
 
-export const Question: mongoose.Model<IQuestionModel> = mongoose.model('Question', questionSchema) as mongoose.Model<IQuestionModel>;

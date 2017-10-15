@@ -9,14 +9,13 @@ export class NodePnPRestResolver extends PnPRestResolver {
         pnp.setup({
             sp: {
                 fetchClientFactory: () => new PlainNodeFetchClient(),
-                baseUrl: baseUrl
+                baseUrl: baseUrl,
+                headers: this.headers
             }
         });
     }
 
     getPnPRestInstance(): typeof pnp.sp {
-        return pnp.sp.configure({
-            headers: this.headers
-        });
+        return pnp.sp;
     }
 }

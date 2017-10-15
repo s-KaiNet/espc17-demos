@@ -1,7 +1,7 @@
 import { SPRest } from 'sp-pnp-js/lib/sharepoint/rest';
 import { PnPRestResolver } from './resolver/PnPRestResolver';
 import * as pnp from 'sp-pnp-js';
-import { List, ChangeQuery } from 'sp-pnp-js';
+import { List, ChangeQuery, ItemUpdateResult } from 'sp-pnp-js';
 
 const URL: any = require('url-parse');
 
@@ -25,12 +25,12 @@ export class QAListManager {
         let ticksPerMillisecond = 10000;
         let now = new Date();
 
-        // sets last changed token to be (time.now - 5 minutes)
+        // sets last changed token to be time.now - 5 minutes
         now.setMinutes(now.getMinutes() - 5);
         let utcDate = this.convertDateToUTC(now);
         let ticks = epochTicks + (utcDate * ticksPerMillisecond);
 
-        let lastChangeToken = `1;3;${listId};${ticks};-1`;
+        let lastChangeToken = '1;3;' + listId + ';' + ticks + ';-1';
 
         return this.getQandAList(listId).getChanges({
             Add: true,
@@ -47,8 +47,47 @@ export class QAListManager {
         return this.getQandAList().items.getById(id).get();
     }
 
-    public getCurrentUser(): Promise<any> {
-        return this.sp.web.currentUser.get();
+    public async getUserName(): Promise<string> {
+        let result = await this.sp.web.currentUser.get();
+
+        return result.Title;
+    }
+
+    public async getWebTitle(): Promise<string> {
+        let result = await this.sp.web.get();
+
+        return result.Title;
+    }
+
+    public async getByIds(ids: number[]): Promise<any[]> {
+        let results: any[] = [];
+
+        let batch = this.sp.createBatch();
+
+        ids.forEach(id => {
+            this.getQandAList().items.getById(id).inBatch(batch).get()
+            .then(data => {
+                results.push(data);
+            });
+        });
+
+        await batch.execute();
+
+        return results;
+    }
+
+    public async approveItem(id: number, approver: string): Promise<ItemUpdateResult> {
+        return this.getQandAList().items.getById(id).update({
+            'OData__ModerationStatus' : 0,
+            'OData__ModerationComments': `Approved by ${approver}`
+        });
+    }
+
+    public async rejectItem(id: number, approver: string): Promise<any> {
+        return this.getQandAList().items.getById(id).update({
+            'OData__ModerationStatus' : 1,
+            'OData__ModerationComments': `Rejected by ${approver}`
+        });
     }
 
     private getQandAList(listId?: string): List {

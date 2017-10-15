@@ -4,7 +4,6 @@
       "moduleResolution": "node",
       "target": "es5",
       "sourceMap": true,
-      "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,
       "lib": [
         "dom",

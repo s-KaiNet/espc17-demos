@@ -91,7 +91,8 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
     new webpack.IgnorePlugin(/vertx/),
     new webpack.DefinePlugin({
-      ROOT_SP_URL: JSON.stringify('https://mvapps.sharepoint.com')
+      ROOT_SP_URL: JSON.stringify('https://mvapps.sharepoint.com'),
+      MONGO_DB: JSON.stringify('mongodb://localhost:27017/qa-manager')
     })],
 }
 

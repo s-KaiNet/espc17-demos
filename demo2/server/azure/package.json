@@ -21,7 +21,6 @@
     "@types/bluebird": "^3.5.14",
     "@types/request-promise": "^4.1.38",
     "adal-node": "^0.1.22",
-    "bluebird": "^3.5.1",
     "cpass": "^2.0.1",
     "mongoose": "^4.12.0",
     "node-pnp-js": "^0.1.2",

@@ -4,7 +4,8 @@ import * as spauth from 'node-sp-auth';
 import { AuthData } from '../../common/authData';
 import { PlainNodeFetchClient } from 'node-pnp-js';
 import * as pnp from 'sp-pnp-js';
-import { QAListManager, NodePnPRestResolver } from 'qa-common';
+import { QAListManager } from 'qa-common/src';
+import { NodePnPRestResolver } from 'qa-common/src';
 
 @Component
 export default class Login extends Vue {
@@ -17,9 +18,8 @@ export default class Login extends Vue {
         console.log(AuthData.auth);
 
         let mngr = new QAListManager(new NodePnPRestResolver(ROOT_SP_URL, AuthData.auth));
-        let user = await mngr.getCurrentUser();
-        AuthData.User = user.Title;
-        console.log(user);
+        AuthData.User = await mngr.getUserName();
+
         this.$router.push('/app');
     }
 }
