@@ -6,10 +6,10 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "server": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=development webpack",
     "start": "electron .",
-    "webpack": "webpack --watch --display normal"
+    "dev": "webpack --watch --display normal"
   },
   "dependencies": {
     "@types/mongoose": "^4.7.23",
