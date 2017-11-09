@@ -54,6 +54,4 @@ pnp.setup({
     }
 });
 
-pnp.sp.web.get().then(data => {
-    console.log(data);
-});
+pnp.sp.web.get().then(data => { console.log(data); });
