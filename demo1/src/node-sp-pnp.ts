@@ -18,23 +18,21 @@ class NodeFetchClient implements HttpClientImpl {
 
     constructor(private authSettngs: spauth.IAuthOptions, private siteUrl?: string) { }
 
-    public fetch(url: string, options: FetchOptions): Promise<any> {
+    public async fetch(url: string, options: FetchOptions): Promise<any> {
 
-        return <any>spauth.getAuth(url, this.authSettngs)
-            .then((data: any) => {
+        let data = await spauth.getAuth(url, this.authSettngs);
 
-                /* attach headers and options received from node-sp-auth */
-                const headers: Headers = new Headers();
-                this.mergeHeaders(headers, options.headers);
-                this.mergeHeaders(headers, data.headers);
+        /* attach headers and options received from node-sp-auth */
+        const headers: Headers = new Headers();
+        this.mergeHeaders(headers, options.headers);
+        this.mergeHeaders(headers, data.headers);
 
-                Util.extend(options, {
-                    headers: headers
-                });
+        Util.extend(options, {
+            headers: headers
+        });
 
-                /* perform actual request with node-fetch */
-                return fetch(url, <any>options);
-            });
+        /* perform actual request with node-fetch */
+        return fetch(url, <any>options);
     }
 
     private mergeHeaders(target: Headers, source: any): void {
@@ -54,4 +52,6 @@ pnp.setup({
     }
 });
 
-pnp.sp.web.get().then(data => { console.log(data); });
+pnp.sp.web.get().then(data => {
+    console.log(data);
+});
