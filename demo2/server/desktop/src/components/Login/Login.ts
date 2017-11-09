@@ -13,7 +13,8 @@ export default class Login extends Vue {
 
     public async login() {
         this.loading = true;
-        let data = await spauth.getAuth(ROOT_SP_URL, { ondemand: true, force: false });
+        //let data = await spauth.getAuth(ROOT_SP_URL, { ondemand: true, force: false });
+        let data = await spauth.getAuth(ROOT_SP_URL, { ondemand: true, force: true });
         AuthData.auth = data.headers;
         console.log(AuthData.auth);
 

@@ -61,7 +61,7 @@ export default class QuestionList extends Vue {
 
     public async created() {
 
-        // TODO - remove for real demo
+        // TODO
         AuthData.User = 'Sergei Sergeev';
         let data = await spauth.getAuth(ROOT_SP_URL, { ondemand: true, force: false });
         this.mngr = new QAListManager(new NodePnPRestResolver(`${ROOT_SP_URL}${this.serverRelativeUrl}`, data.headers));

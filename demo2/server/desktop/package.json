@@ -8,7 +8,7 @@
   "scripts": {
     "server": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=development webpack",
-    "start": "electron .",
+    "start": "npm run build && electron .",
     "dev": "webpack --watch --display normal"
   },
   "dependencies": {
