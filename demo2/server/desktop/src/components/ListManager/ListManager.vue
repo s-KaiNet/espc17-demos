@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs type="border-card">
-      <el-tab-pane v-for="site in computedSites" :label="site.title" :key="site.id">
+      <el-tab-pane v-for="site in computedSites" :label="site.title" :key="site.title">
         <div>
           {{fullSiteUrl(site)}}
         </div>

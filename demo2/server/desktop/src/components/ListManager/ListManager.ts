@@ -29,7 +29,6 @@ export default class ListManager extends Vue {
             let newSite: ISitesData = {
                 serverRelativeUrl: site.serverRelativeUrl,
                 title: site.title,
-                id: site.id,
                 questions: []
             };
 

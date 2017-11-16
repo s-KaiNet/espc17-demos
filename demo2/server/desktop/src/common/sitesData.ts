@@ -1,7 +1,6 @@
 export interface ISitesData {
     serverRelativeUrl: string;
     title: string;
-    id: string;
     questions: IQuestionData[];
 }
 
